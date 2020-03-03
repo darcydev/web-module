@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+
+import TabPanel from './sections/TabPanel/TabPanel';
+
+import './styles.css';
+import 'antd/dist/antd.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <div>banner</div>
+      <TabPanel />
     </div>
   );
 }
 
 export default App;
+
+/*
+React App flow of State:
+1) Tab Panel
+2) Control Panel
+3) Map Box
+4) Info Box
+*/
