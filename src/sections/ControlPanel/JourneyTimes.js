@@ -19,11 +19,7 @@ export default function JourneyTimesControlPanel() {
 
   let beforeTime, afterTime, timeReduction, beforeString, afterString;
 
-  console.log(fromLocation, toLocation);
-
-  if (fromLocation && toLocation && toLocation !== fromLocation) {
-    console.log(journeyTimes);
-
+  if (fromLocation && toLocation) {
     const ROUTE = journeyTimes[fromLocation][toLocation];
 
     beforeTime = ROUTE[0];
@@ -40,7 +36,6 @@ export default function JourneyTimesControlPanel() {
 
       let hour = Math.floor(num);
       let dec = (1 / 60) * Math.round((num - hour) / (1 / 60));
-
       let minute = Math.floor(dec * 60) + '';
 
       if (minute.length < 2) minute = '0' + minute;
@@ -53,54 +48,97 @@ export default function JourneyTimesControlPanel() {
     beforeString = convertFloatToTime(beforeTime);
     afterString = convertFloatToTime(afterTime);
     timeReduction = Math.round((afterTime / beforeTime) * 100);
-
-    console.log(beforeTime, afterTime, timeReduction);
   }
 
   // TODO: automatically get the departure cities and create <Option> from that,
-  // then, automatically get that departure cities avaliable arrival destinations and create <Option> from that
+
+  // get all from locations from journeyTimes
+  const FROM_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes).map(v => (
+    <Option key={v} value={v}>
+      {v}
+    </Option>
+  ));
+
+  // get all possible destinations for the SELECTED location
+
+  let TO_LOCATIONS_OPTIONS_MARKUP = null;
+
+  if (fromLocation) {
+    TO_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes[fromLocation]).map(
+      v => (
+        <Option key={v} value={v}>
+          {v}
+        </Option>
+      )
+    );
+  }
 
   return (
     <>
       <div>
-        <div className='select-bars'>
-          <h5>From:</h5>
-          <Select
-            defaultValue='SELECT LOCATION'
-            onChange={value => handleToLocation(value)}
-          >
-            <Option value='sydney'>Sydney</Option>
-            <Option value='canberra'>Canberra</Option>
-            <Option value='newcastle'>Newcastle</Option>
-          </Select>
-          <h5>To:</h5>
-          <Select
-            defaultValue='SELECT LOCATION'
-            onChange={value => handleFromLocation(value)}
-          >
-            <Option value='sydney'>Sydney</Option>
-            <Option value='canberra'>Canberra</Option>
-            <Option value='newcastle'>Newcastle</Option>
-          </Select>
-        </div>
-        <div className='sliders'>
-          <h5>Before</h5>
-          <h3>{beforeString || 'XX:XX'}</h3>
-          <ProgessBar />
-          <h5>After</h5>
-          <h3>{afterString || 'XX:XX'}</h3>
-          <ProgessBar
-            status='active'
-            percent={timeReduction}
-            strokeColor='green'
-          />
-        </div>
+        <StyledFlexContainer>
+          <StyledSelectBarContainer>
+            <h5 style={{ textAlign: 'left' }}>FROM:</h5>
+            <Select
+              defaultValue='SELECT LOCATION'
+              onChange={value => handleFromLocation(value)}
+              style={{ width: '100%' }}
+            >
+              {FROM_LOCATIONS_OPTIONS_MARKUP}
+            </Select>
+          </StyledSelectBarContainer>
+          <StyledSelectBarContainer>
+            <h5 style={{ textAlign: 'left' }}>TO:</h5>
+            <Select
+              defaultValue='SELECT LOCATION'
+              onChange={value => handleToLocation(value)}
+              style={{ width: '100%' }}
+            >
+              {TO_LOCATIONS_OPTIONS_MARKUP}
+            </Select>
+          </StyledSelectBarContainer>
+        </StyledFlexContainer>
+        <StyledSliders>
+          <StyledSlider>
+            <StyledFlexContainer>
+              <StyledH5>BEFORE</StyledH5>
+              <h3>{beforeString || 'XX:XX'}</h3>
+            </StyledFlexContainer>
+            <ProgessBar />
+          </StyledSlider>
+          <StyledSlider>
+            <StyledFlexContainer>
+              <StyledH5>AFTER</StyledH5>
+              <h3>{afterString || 'XX:XX'}</h3>
+            </StyledFlexContainer>
+            <ProgessBar
+              status='active'
+              percent={timeReduction}
+              strokeColor='green'
+            />
+          </StyledSlider>
+        </StyledSliders>
       </div>
       <MapBox imgSrc={northern} />
     </>
   );
 }
 
+const StyledFlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledSelectBarContainer = styled.div`
+  width: 48%;
+`;
+
 const StyledSliders = styled.div``;
 
-const StyledSlider = styled.div``;
+const StyledSlider = styled.div`
+  padding: 10px 0;
+`;
+
+const StyledH5 = styled.h5`
+  margin: auto 0;
+`;

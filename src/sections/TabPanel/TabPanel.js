@@ -5,6 +5,8 @@ import CorridorsControlPanel from '../ControlPanel/Corridors';
 import JourneyTimesControlPanel from '../ControlPanel/JourneyTimes';
 import StagesControlPanel from '../ControlPanel/Stages';
 
+import './TabPanel.css';
+
 const { TabPane } = Tabs;
 
 export default function TabPanel() {

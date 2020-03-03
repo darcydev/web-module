@@ -60,8 +60,8 @@ const StyledButton = styled.button`
   min-width: 200px;
   border-radius: 15px;
   padding: 10px;
-  margin: 10px;
+  margin: 7px;
   letter-spacing: 1.25px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 500;
 `;
