@@ -10,7 +10,7 @@ export default function ProgessBar({
     <Progress
       status={status}
       percent={percent}
-      showInfo={false}
+      showInfo={true}
       strokeWidth={10}
       strokeColor={strokeColor}
     />

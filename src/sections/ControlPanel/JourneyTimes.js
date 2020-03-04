@@ -5,7 +5,7 @@ import { Select } from 'antd';
 import MapBox from '../MapBox/MapBox';
 import InfoBox from '../InfoBox/JourneyTimes/Info';
 
-import ProgessBar from '../../components/ProgessBar';
+import CustomProgressBar from '../../components/CustomProgressBar';
 
 import { journeyTimes } from '../../data/JourneyTimes';
 
@@ -21,10 +21,10 @@ export default function JourneyTimesControlPanel() {
   let beforeTime, afterTime, timeReduction, beforeString, afterString;
 
   if (fromLocation && toLocation) {
-    const ROUTE = journeyTimes[fromLocation][toLocation];
+    let route = journeyTimes[fromLocation][toLocation] || undefined;
 
-    beforeTime = ROUTE[0];
-    afterTime = ROUTE[1];
+    beforeTime = route[0];
+    afterTime = route[1];
 
     /**
      * format a time in number format to string format
@@ -101,21 +101,19 @@ export default function JourneyTimesControlPanel() {
         </StyledFlexContainer>
         <StyledSliders>
           <StyledSlider>
-            <StyledFlexContainer>
-              <StyledH5>BEFORE</StyledH5>
-              <h3>{beforeString || 'XX:XX'}</h3>
-            </StyledFlexContainer>
-            <ProgessBar />
+            <CustomProgressBar
+              lineColor='grey'
+              heading='before'
+              width={100}
+              timeString={beforeString}
+            />
           </StyledSlider>
           <StyledSlider>
-            <StyledFlexContainer>
-              <StyledH5>AFTER</StyledH5>
-              <h3>{afterString || 'XX:XX'}</h3>
-            </StyledFlexContainer>
-            <ProgessBar
-              status='active'
-              percent={timeReduction}
-              strokeColor='green'
+            <CustomProgressBar
+              lineColor='green'
+              heading='after'
+              width={timeReduction}
+              timeString={afterString}
             />
           </StyledSlider>
         </StyledSliders>
@@ -139,8 +137,4 @@ const StyledSliders = styled.div``;
 
 const StyledSlider = styled.div`
   padding: 10px 0;
-`;
-
-const StyledH5 = styled.h5`
-  margin: auto 0;
 `;

@@ -143,4 +143,7 @@ const StyledButton = styled.button`
   letter-spacing: 1.25px;
   font-size: 14px;
   font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
