@@ -75,7 +75,7 @@ export default function JourneyTimesControlPanel() {
 
   return (
     <>
-      <div>
+      <div className='padding-sm'>
         <StyledFlexContainer>
           <StyledSelectBarContainer>
             <h5 style={{ textAlign: 'left' }}>FROM:</h5>

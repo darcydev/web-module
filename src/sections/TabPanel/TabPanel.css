@@ -1,16 +1,19 @@
-.ant-tabs-navs-container {
+.ant-tabs-bar {
   border-bottom: 5px solid blue !important;
 }
 
 .ant-tabs-nav {
   width: 100%;
-  border-bottom: 5px solid blue !important;
 }
 
-.ant-tabs-tab {
+.ant-tabs-nav .ant-tabs-tab {
   width: 33%;
-  font-size: 18px;
+  font-size: 14px;
   background: rgb(102, 217, 255) !important;
+  letter-spacing: 1.25px;
+  margin: 0 2px;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
 }
 
 .ant-tabs-tab-active {

@@ -2,51 +2,130 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Import the map images
-import northern from '../../assets/1.png';
-import southernInland from '../../assets/2.png';
-import southernCoastal from '../../assets/3.png';
-import centralWest from '../../assets/4.png';
+import imageGeneral from '../../assets/images/corridors/general.png';
+import imageNorthern from '../../assets/images/corridors/northern.png';
+import imageSouthernInland from '../../assets/images/corridors/southernInland.png';
+import imageSouthernCoastal from '../../assets/images/corridors/southernCoastal.png';
+import imageCentralWest from '../../assets/images/corridors/centralWest.png';
 
 import MapBox from '../MapBox/MapBox';
+import InfoBox from '../InfoBox/Corridors/Info';
 
 export default function CorridorsControlPanel() {
-  const [btnSelected, handleBtnSelect] = useState(northern);
+  const [btnSelected, handleBtnSelect] = useState('general');
+
+  const CANCEL_BUTTON = (
+    <button onClick={() => handleBtnSelect('general')}>X</button>
+  );
+
+  let map, info;
+
+  switch (btnSelected) {
+    case 'general':
+      map = imageGeneral;
+      info = 'to do';
+      break;
+    case 'northern':
+      map = imageNorthern;
+      info = 'to do';
+      break;
+    case 'southernInland':
+      map = imageSouthernInland;
+      info = 'to do';
+      break;
+    case 'southernCoastal':
+      map = imageSouthernCoastal;
+      info = 'to do';
+      break;
+    case 'centralWest':
+      map = imageCentralWest;
+      info = 'to do';
+      break;
+    default:
+      map = imageGeneral;
+      info = 'to do';
+  }
 
   return (
     <>
-      <div style={{ width: '60%', margin: 'auto' }}>
+      <StyledContainer>
         <h3 style={{ textAlign: 'left' }}>Select a route for more detail</h3>
         <StyledFlexDiv>
           <StyledButton
-            style={{ backgroundColor: 'green' }}
-            onClick={() => handleBtnSelect(northern)}
+            style={{
+              backgroundColor:
+                btnSelected === 'northern' || btnSelected === 'general'
+                  ? 'green'
+                  : 'grey'
+            }}
+            onClick={
+              btnSelected === 'northern'
+                ? () => handleBtnSelect('general')
+                : () => handleBtnSelect('northern')
+            }
           >
             Northern
+            {btnSelected === 'northern' ? CANCEL_BUTTON : null}
           </StyledButton>
           <StyledButton
-            style={{ backgroundColor: 'gold' }}
-            onClick={() => handleBtnSelect(southernInland)}
+            style={{
+              backgroundColor:
+                btnSelected === 'southernInland' || btnSelected === 'general'
+                  ? 'gold'
+                  : 'grey'
+            }}
+            onClick={
+              btnSelected === 'southernInland'
+                ? () => handleBtnSelect('general')
+                : () => handleBtnSelect('southernInland')
+            }
           >
             Southern Inland
+            {btnSelected === 'southernInland' ? CANCEL_BUTTON : null}
           </StyledButton>
           <StyledButton
-            style={{ backgroundColor: 'purple' }}
-            onClick={() => handleBtnSelect(southernCoastal)}
+            style={{
+              backgroundColor:
+                btnSelected === 'southernCoastal' || btnSelected === 'general'
+                  ? 'purple'
+                  : 'grey'
+            }}
+            onClick={
+              btnSelected === 'southernCoastal'
+                ? () => handleBtnSelect('general')
+                : () => handleBtnSelect('southernCoastal')
+            }
           >
             Southern Central
+            {btnSelected === 'southernCoastal' ? CANCEL_BUTTON : null}
           </StyledButton>
           <StyledButton
-            style={{ backgroundColor: 'orange' }}
-            onClick={() => handleBtnSelect(centralWest)}
+            style={{
+              backgroundColor:
+                btnSelected === 'centralWest' || btnSelected === 'general'
+                  ? 'orange'
+                  : 'grey'
+            }}
+            onClick={
+              btnSelected === 'centralWest'
+                ? () => handleBtnSelect('general')
+                : () => handleBtnSelect('centralWest')
+            }
           >
             Central West
+            {btnSelected === 'centralWest' ? CANCEL_BUTTON : null}
           </StyledButton>
         </StyledFlexDiv>
-      </div>
-      <MapBox imgSrc={btnSelected} alt={btnSelected} />
+      </StyledContainer>
+      <MapBox imgSrc={map} alt={btnSelected} />
+      <InfoBox heading={btnSelected} content={btnSelected} />
     </>
   );
 }
+
+const StyledContainer = styled.div`
+  padding: 5px 10px;
+`;
 
 const StyledFlexDiv = styled.div`
   display: flex;
@@ -62,6 +141,6 @@ const StyledButton = styled.button`
   padding: 10px;
   margin: 7px;
   letter-spacing: 1.25px;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
 `;
