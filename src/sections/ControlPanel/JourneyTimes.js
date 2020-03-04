@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { Select } from 'antd';
 
 import MapBox from '../MapBox/MapBox';
+import InfoBox from '../InfoBox/JourneyTimes/Info';
 
 import ProgessBar from '../../components/ProgessBar';
 
 import { journeyTimes } from '../../data/JourneyTimes';
 
 // Import the map images
-import northern from '../../assets/1.png';
+import general from '../../assets/images/journeyTimes/general.png';
 
 const { Option } = Select;
 
@@ -119,7 +120,8 @@ export default function JourneyTimesControlPanel() {
           </StyledSlider>
         </StyledSliders>
       </div>
-      <MapBox imgSrc={northern} />
+      <MapBox imgSrc={general} />
+      <InfoBox />
     </>
   );
 }

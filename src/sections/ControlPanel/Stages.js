@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Slider } from 'antd';
 
 import MapBox from '../MapBox/MapBox';
+import Info from '../InfoBox/Stages/Info';
 
 // Import the map images
 import one from '../../assets/1.png';
@@ -10,8 +11,6 @@ import three from '../../assets/3.png';
 
 export default function StagesControlPanel() {
   const [stage, handleStage] = useState(1);
-
-  console.log(stage);
 
   let imgSrc;
 
@@ -31,7 +30,7 @@ export default function StagesControlPanel() {
 
   return (
     <>
-      <div className='padding-sm'>
+      <div className='padding-sm' style={{ margin: '10px 40px' }}>
         <Slider
           dots
           marks={{ 1: 'Stage 1', 2: 'Stage 2', 3: 'Stage 3' }}
@@ -42,6 +41,7 @@ export default function StagesControlPanel() {
         />
       </div>
       <MapBox imgSrc={imgSrc} />
+      <Info />
     </>
   );
 }
