@@ -4,54 +4,60 @@ import { Select } from 'antd';
 
 import MapBox from '../MapBox/MapBox';
 import InfoBox from '../InfoBox/JourneyTimes/Info';
-
 import CustomProgressBar from '../../components/CustomProgressBar';
-
 import { journeyTimes } from '../../data/JourneyTimes';
-
 // Import the map images
 import general from '../../assets/images/journeyTimes/general.png';
 
+import './JourneyTimes.scss';
+
 const { Option } = Select;
+
+/**
+ * format a time in number format (XX.XX) to string format (XX:XX)
+ * @param {number} num
+ * @returns {string} string
+ */
+const convertNumToTime = num => {
+  let sign = num >= 0 ? 1 : -1;
+  num *= sign;
+
+  let hour = Math.floor(num);
+  let dec = (1 / 60) * Math.round((num - hour) / (1 / 60));
+  let minute = Math.floor(dec * 60) + '';
+
+  if (minute.length < 2) minute = '0' + minute;
+
+  sign = sign === 1 ? '' : '-';
+
+  return sign + hour + ':' + minute;
+};
 
 export default function JourneyTimesControlPanel() {
   const [toLocation, handleToLocation] = useState('');
   const [fromLocation, handleFromLocation] = useState('');
 
-  let beforeTime, afterTime, timeReduction, beforeString, afterString;
+  let beforeTime,
+    afterTime,
+    timeReduction = 100,
+    beforeString,
+    afterString;
 
   if (fromLocation && toLocation) {
-    let route = journeyTimes[fromLocation][toLocation] || undefined;
+    if (!journeyTimes[fromLocation][toLocation]) {
+      handleToLocation('');
+      handleFromLocation('');
+    } else {
+      let route = journeyTimes[fromLocation][toLocation];
 
-    beforeTime = route[0];
-    afterTime = route[1];
+      beforeTime = route[0];
+      afterTime = route[1];
 
-    /**
-     * format a time in number format to string format
-     * @param {number} num 11.05
-     * @returns {string} string 11:09
-     */
-    const convertFloatToTime = num => {
-      let sign = num >= 0 ? 1 : -1;
-      num *= sign;
-
-      let hour = Math.floor(num);
-      let dec = (1 / 60) * Math.round((num - hour) / (1 / 60));
-      let minute = Math.floor(dec * 60) + '';
-
-      if (minute.length < 2) minute = '0' + minute;
-
-      sign = sign === 1 ? '' : '-';
-
-      return sign + hour + ':' + minute;
-    };
-
-    beforeString = convertFloatToTime(beforeTime);
-    afterString = convertFloatToTime(afterTime);
-    timeReduction = Math.round((afterTime / beforeTime) * 100);
+      beforeString = convertNumToTime(beforeTime);
+      afterString = convertNumToTime(afterTime);
+      timeReduction = Math.round((afterTime / beforeTime) * 100);
+    }
   }
-
-  // TODO: automatically get the departure cities and create <Option> from that,
 
   // get all from locations from journeyTimes
   const FROM_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes).map(v => (
@@ -61,7 +67,6 @@ export default function JourneyTimesControlPanel() {
   ));
 
   // get all possible destinations for the SELECTED location
-
   let TO_LOCATIONS_OPTIONS_MARKUP = null;
 
   if (fromLocation) {

@@ -1,0 +1,19 @@
+@import '../../variables.scss';
+
+.ant-select {
+  .ant-select-selector {
+    background-color: $darkBlue !important;
+
+    .ant-select-selection-search {
+      background-color: $lightBlue !important;
+    }
+
+    .ant-select-selection-item {
+      color: $darkBlue !important;
+    }
+  }
+
+  .ant-select-arrow {
+    color: $white !important;
+  }
+}
