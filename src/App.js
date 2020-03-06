@@ -2,7 +2,7 @@ import React from 'react';
 
 import TabPanel from './sections/TabPanel/TabPanel';
 
-import './styles.css';
+import './styles.scss';
 import 'antd/dist/antd.css';
 
 function App() {

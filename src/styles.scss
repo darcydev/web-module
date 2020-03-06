@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Oxanium|Raleway|Spartan&display=swap');
+
+@import './variables.scss';
+
+h1, h2, h3,h4, h5, h6 {
+  font-family: $headingPrimary, 'Arial', 'san-sarief';
+}
+
+p {
+font-family: $textPrimary, 'Arial', 'san-sarief';
+}
+
+.App {
+  text-align: center;
+  max-width: 760px;
+  margin: auto;
+}
+
+.padding-sm {
+  padding: 5px 10px;
+}
+
+.button__big {
+  color: #fff;
+  font-weight: 700;
+  border-radius: 15px;
+  padding: 10px;
+  margin: 0 5px;
+}

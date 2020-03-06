@@ -4,7 +4,7 @@ import { Select } from 'antd';
 
 import MapBox from '../MapBox/MapBox';
 import InfoBox from '../InfoBox/JourneyTimes/Info';
-import CustomProgressBar from '../../components/CustomProgressBar';
+import ProgressBar from '../../components/ProgressBar';
 import { journeyTimes } from '../../data/JourneyTimes';
 // Import the map images
 import general from '../../assets/images/journeyTimes/general.png';
@@ -106,15 +106,16 @@ export default function JourneyTimesControlPanel() {
         </StyledFlexContainer>
         <StyledSliders>
           <StyledSlider>
-            <CustomProgressBar
+            <ProgressBar
               lineColor='grey'
               heading='before'
               width={100}
               timeString={beforeString}
             />
+            <NewProgressBar value={50} />
           </StyledSlider>
           <StyledSlider>
-            <CustomProgressBar
+            <ProgressBar
               lineColor='green'
               heading='after'
               width={timeReduction}

@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSpring, animated, config } from 'react-spring';
+import { Spring } from 'react-spring/renderprops-universal';
 
 export default function ProgessBar({ lineColor, heading, width, timeString }) {
   return (
@@ -11,9 +13,9 @@ export default function ProgessBar({ lineColor, heading, width, timeString }) {
         </h3>
       </div>
       <OuterBar>
-        <InnerBar style={{ backgroundColor: lineColor, width: `${width}%` }}>
-          100%
-        </InnerBar>
+        <useSpring from={100} to={width}>
+          {animation => <InnerBar style={animation}>100%</InnerBar>}
+        </useSpring>
       </OuterBar>
     </div>
   );
