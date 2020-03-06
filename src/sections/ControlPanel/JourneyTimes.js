@@ -112,7 +112,6 @@ export default function JourneyTimesControlPanel() {
               width={100}
               timeString={beforeString}
             />
-            <NewProgressBar value={50} />
           </StyledSlider>
           <StyledSlider>
             <ProgressBar
