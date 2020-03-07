@@ -1,8 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Motion, spring } from 'react-motion';
+import React from "react";
+import styled from "styled-components";
+import { Motion, spring } from "react-motion";
 
-export function ProgessBar({ value = 100 }) {
+export default function ProgressBar({ value = 100 }) {
+  console.log(value);
+
   return (
     <OuterBar>
       <Motion
