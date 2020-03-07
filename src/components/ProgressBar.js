@@ -1,31 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSpring, animated, config } from 'react-spring';
-import { Spring } from 'react-spring/renderprops-universal';
+import { Motion, spring } from 'react-motion';
 
-export default function ProgessBar({ lineColor, heading, width, timeString }) {
+export function ProgessBar({ value = 100 }) {
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <StyledHeading>{heading}</StyledHeading>
-        <h3 style={{ width: `${width - 10}%`, textAlign: 'right' }}>
-          {timeString}
-        </h3>
-      </div>
-      <OuterBar>
-        <useSpring from={100} to={width}>
-          {animation => <InnerBar style={animation}>100%</InnerBar>}
-        </useSpring>
-      </OuterBar>
-    </div>
+    <OuterBar>
+      <Motion
+        defaultStyle={{ width: 100 }}
+        style={{
+          width: spring(value, {
+            stiffness: 30,
+            damping: 15
+          })
+        }}
+      >
+        {(style) => <InnerBar width={style.width} />}
+      </Motion>
+    </OuterBar>
   );
 }
-
-const StyledHeading = styled.h4`
-  text-align: left;
-  text-transform: uppercase;
-  width: 10%;
-`;
 
 const OuterBar = styled.div`
   background-color: whiteSmoke;
@@ -36,8 +29,9 @@ const OuterBar = styled.div`
 `;
 
 const InnerBar = styled.span`
+  display: block;
+  width: ${(props) => props.width}%;
   height: 12px;
   border-radius: 3px;
-  display: block;
-  text-indent: -9999px;
+  background-color: red;
 `;

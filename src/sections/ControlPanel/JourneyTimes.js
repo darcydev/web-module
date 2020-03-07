@@ -4,7 +4,7 @@ import { Select } from 'antd';
 
 import MapBox from '../MapBox/MapBox';
 import InfoBox from '../InfoBox/JourneyTimes/Info';
-import ProgressBar from '../../components/ProgressBar';
+import { ProgessBar } from '../../components/ProgressBar';
 import { journeyTimes } from '../../data/JourneyTimes';
 // Import the map images
 import general from '../../assets/images/journeyTimes/general.png';
@@ -18,7 +18,7 @@ const { Option } = Select;
  * @param {number} num
  * @returns {string} string
  */
-const convertNumToTime = num => {
+const convertNumToTime = (num) => {
   let sign = num >= 0 ? 1 : -1;
   num *= sign;
 
@@ -60,7 +60,7 @@ export default function JourneyTimesControlPanel() {
   }
 
   // get all from locations from journeyTimes
-  const FROM_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes).map(v => (
+  const FROM_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes).map((v) => (
     <Option key={v} value={v}>
       {v}
     </Option>
@@ -71,7 +71,7 @@ export default function JourneyTimesControlPanel() {
 
   if (fromLocation) {
     TO_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes[fromLocation]).map(
-      v => (
+      (v) => (
         <Option key={v} value={v}>
           {v}
         </Option>
@@ -87,7 +87,7 @@ export default function JourneyTimesControlPanel() {
             <h5 style={{ textAlign: 'left' }}>FROM:</h5>
             <Select
               defaultValue='SELECT LOCATION'
-              onChange={value => handleFromLocation(value)}
+              onChange={(value) => handleFromLocation(value)}
               style={{ width: '100%' }}
             >
               {FROM_LOCATIONS_OPTIONS_MARKUP}
@@ -97,7 +97,7 @@ export default function JourneyTimesControlPanel() {
             <h5 style={{ textAlign: 'left' }}>TO:</h5>
             <Select
               defaultValue='SELECT LOCATION'
-              onChange={value => handleToLocation(value)}
+              onChange={(value) => handleToLocation(value)}
               style={{ width: '100%' }}
             >
               {TO_LOCATIONS_OPTIONS_MARKUP}
@@ -106,20 +106,22 @@ export default function JourneyTimesControlPanel() {
         </StyledFlexContainer>
         <StyledSliders>
           <StyledSlider>
-            <ProgressBar
-              lineColor='grey'
-              heading='before'
-              width={100}
-              timeString={beforeString}
-            />
+            <div className='progress-bar-labels'>
+              <h5>Before</h5>
+              <h3 style={{ width: `${100 - 10}%`, textAlign: 'right' }}>
+                {beforeString}
+              </h3>
+            </div>
+            <ProgessBar value={100} />
           </StyledSlider>
           <StyledSlider>
-            <ProgressBar
-              lineColor='green'
-              heading='after'
-              width={timeReduction}
-              timeString={afterString}
-            />
+            <div className='progress-bar-labels'>
+              <h5>After</h5>
+              <h3 style={{ width: `${30 - 10}%`, textAlign: 'right' }}>
+                {afterString}
+              </h3>
+            </div>
+            <ProgessBar value={afterTime} />
           </StyledSlider>
         </StyledSliders>
       </div>
