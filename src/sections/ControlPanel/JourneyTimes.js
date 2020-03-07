@@ -13,6 +13,30 @@ import "./JourneyTimes.scss";
 
 const { Option } = Select;
 
+/**
+ * helper function to convert a time in decimal format to string format
+ * @param {number} num 2.30
+ * @returns {string} 2hrs 30min
+ */
+const convertNumToString = (num) => {
+  let hour = Math.round(num);
+  let minute = Math.round((num - hour) * 100);
+
+  return `${hour}hrs ${minute}min`;
+};
+
+/**
+ * a helper function to convert all object keys into a option within select bar
+ * @param {object} objKey
+ * @returns {component}
+ */
+const convertKeysToOption = (objKey) =>
+  Object.keys(objKey).map((v) => (
+    <Option key={v} value={v}>
+      {v}
+    </Option>
+  ));
+
 export default function JourneyTimesControlPanel() {
   const [toLocation, handleToLocation] = useState("");
   const [fromLocation, handleFromLocation] = useState("");
@@ -29,38 +53,16 @@ export default function JourneyTimesControlPanel() {
     beforeTime = ROUTE[0];
     afterTime = ROUTE[1];
 
-    const convertNumToString = (num) => {
-      let hour = Math.round(num);
-      let minute = Math.round((num - hour) * 100);
-
-      return `${hour}hrs ${minute}min`;
-    };
-
     beforeString = convertNumToString(beforeTime);
     afterString = convertNumToString(afterTime);
 
     timeReduction = Math.round((afterTime / beforeTime) * 100);
   }
 
-  // get all from locations from journeyTimes
-  const FROM_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes).map((v) => (
-    <Option key={v} value={v}>
-      {v}
-    </Option>
-  ));
-
-  // get all possible destinations for the SELECTED location
-  let TO_LOCATIONS_OPTIONS_MARKUP = null;
-
-  if (fromLocation) {
-    TO_LOCATIONS_OPTIONS_MARKUP = Object.keys(journeyTimes[fromLocation]).map(
-      (v) => (
-        <Option key={v} value={v}>
-          {v}
-        </Option>
-      )
-    );
-  }
+  const FROM_LOCATIONS_OPTIONS_MARKUP = convertKeysToOption(journeyTimes);
+  const TO_LOCATIONS_OPTIONS_MARKUP = fromLocation
+    ? convertKeysToOption(journeyTimes[fromLocation])
+    : null;
 
   return (
     <>
