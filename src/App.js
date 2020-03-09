@@ -1,25 +1,20 @@
 import React from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import TabPanel from './sections/TabPanel/TabPanel';
+
+import { theme } from './theme';
 
 import './styles.scss';
 import 'antd/dist/antd.css';
 
-function App() {
+export default function App() {
   return (
-    <div className='App'>
-      <div>banner</div>
-      <TabPanel />
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className='App'>
+        <div>banner</div>
+        <TabPanel />
+      </div>
+    </ThemeProvider>
   );
 }
-
-export default App;
-
-/*
-React App flow of State:
-1) Tab Panel
-2) Control Panel
-3) Map Box
-4) Info Box
-*/

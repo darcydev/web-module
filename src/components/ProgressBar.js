@@ -1,10 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import { Motion, spring } from "react-motion";
+import React from 'react';
+import styled from 'styled-components';
+import { Motion, spring } from 'react-motion';
+
+import '../variables.scss';
 
 export default function ProgressBar({ value = 100 }) {
-  console.log(value);
-
   return (
     <OuterBar>
       <Motion
@@ -16,7 +16,7 @@ export default function ProgressBar({ value = 100 }) {
           })
         }}
       >
-        {(style) => <InnerBar width={style.width} />}
+        {style => <InnerBar width={style.width} />}
       </Motion>
     </OuterBar>
   );
@@ -32,8 +32,8 @@ const OuterBar = styled.div`
 
 const InnerBar = styled.span`
   display: block;
-  width: ${(props) => props.width}%;
+  width: ${props => props.width}%;
   height: 12px;
   border-radius: 3px;
-  background-color: red;
+  background-color: ${props => props.theme.colors.primaryGreen};
 `;

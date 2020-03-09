@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import { Select } from "antd";
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { Select } from 'antd';
 
-import MapBox from "../MapBox/MapBox";
-import InfoBox from "../InfoBox/JourneyTimes/Info";
-import ProgressBar from "../../components/ProgressBar";
-import { journeyTimes } from "../../data/JourneyTimes";
+import MapBox from '../MapBox/MapBox';
+import InfoBox from '../InfoBox/JourneyTimes/Info';
+import ProgressBar from '../../components/ProgressBar';
+import { journeyTimes } from '../../data/JourneyTimes';
 // Import the map images
-import general from "../../assets/images/journeyTimes/general.png";
+import general from '../../assets/images/journeyTimes/general.png';
 
-import "./JourneyTimes.scss";
+import './JourneyTimes.scss';
 
 const { Option } = Select;
 
@@ -18,7 +18,7 @@ const { Option } = Select;
  * @param {number} num 2.30
  * @returns {string} 2hrs 30min
  */
-const convertNumToString = (num) => {
+const convertNumToString = num => {
   let hour = Math.round(num);
   let minute = Math.round((num - hour) * 100);
 
@@ -30,16 +30,21 @@ const convertNumToString = (num) => {
  * @param {object} objKey
  * @returns {component}
  */
-const convertKeysToOption = (objKey) =>
-  Object.keys(objKey).map((v) => (
+const convertKeysToOption = objKey =>
+  Object.keys(objKey).map(v => (
     <Option key={v} value={v}>
       {v}
     </Option>
   ));
 
 export default function JourneyTimesControlPanel() {
-  const [toLocation, handleToLocation] = useState("");
-  const [fromLocation, handleFromLocation] = useState("");
+  const [toLocation, handleToLocation] = useState('');
+  const [fromLocation, handleFromLocation] = useState('');
+
+  const resetState = () => {
+    handleToLocation('');
+    handleFromLocation('');
+  };
 
   let beforeTime,
     afterTime,
@@ -66,55 +71,54 @@ export default function JourneyTimesControlPanel() {
 
   return (
     <>
-      <div className="padding-sm">
+      <StyledContainer>
         <StyledFlexContainer>
           <StyledSelectBarContainer>
-            <h5 style={{ textAlign: "left" }}>FROM:</h5>
-            <Select
-              defaultValue="SELECT LOCATION"
-              onChange={(value) => handleFromLocation(value)}
-              style={{ width: "100%" }}
+            <h5 style={{ textAlign: 'left' }}>FROM:</h5>
+            <StyledSelect
+              defaultValue='SELECT LOCATION'
+              onFocus={() => handleToLocation('')}
+              onChange={value => handleFromLocation(value)}
             >
               {FROM_LOCATIONS_OPTIONS_MARKUP}
-            </Select>
+            </StyledSelect>
           </StyledSelectBarContainer>
           <StyledSelectBarContainer>
-            <h5 style={{ textAlign: "left" }}>TO:</h5>
-            <Select
-              defaultValue="SELECT LOCATION"
-              onChange={(value) => handleToLocation(value)}
-              style={{ width: "100%" }}
+            <h5 style={{ textAlign: 'left' }}>TO:</h5>
+            <StyledSelect
+              defaultValue='SELECT LOCATION'
+              onChange={value => handleToLocation(value)}
             >
               {TO_LOCATIONS_OPTIONS_MARKUP}
-            </Select>
+            </StyledSelect>
           </StyledSelectBarContainer>
         </StyledFlexContainer>
-        <StyledSliders>
+        <div>
           <StyledSlider>
-            <div className="progress-bar-labels">
-              <h5>Before</h5>
-              <h3 style={{ width: `${100 - 10}%`, textAlign: "right" }}>
-                {beforeString}
-              </h3>
-            </div>
+            <StyledSliderHeadings>
+              <styledH4>Before</styledH4>
+              <h3>{beforeString}</h3>
+            </StyledSliderHeadings>
             <ProgressBar value={100} />
           </StyledSlider>
           <StyledSlider>
-            <div className="progress-bar-labels">
-              <h5>After</h5>
-              <h3 style={{ width: `${30 - 10}%`, textAlign: "right" }}>
-                {afterString}
-              </h3>
-            </div>
+            <StyledSliderHeadings>
+              <StyledH4>After</StyledH4>
+              <h3>{afterString}</h3>
+            </StyledSliderHeadings>
             <ProgressBar value={timeReduction} />
           </StyledSlider>
-        </StyledSliders>
-      </div>
+        </div>
+      </StyledContainer>
       <MapBox imgSrc={general} />
       <InfoBox />
     </>
   );
 }
+
+const StyledContainer = styled.div`
+  padding: ${props => props.theme.sizes.sm};
+`;
 
 const StyledFlexContainer = styled.div`
   display: flex;
@@ -125,8 +129,19 @@ const StyledSelectBarContainer = styled.div`
   width: 48%;
 `;
 
-const StyledSliders = styled.div``;
+const StyledSelect = styled(Select)`
+  font-size: 18px;
+  width: 100%;
+`;
 
 const StyledSlider = styled.div`
   padding: 10px 0;
+`;
+const StyledSliderHeadings = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const StyledH4 = styled.h4`
+  align-self: center;
 `;
