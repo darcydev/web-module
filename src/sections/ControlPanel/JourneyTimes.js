@@ -5,11 +5,12 @@ import { Select } from 'antd';
 import MapBox from '../MapBox/MapBox';
 import InfoBox from '../InfoBox/JourneyTimes/Info';
 import ProgressBar from '../../components/ProgressBar';
+// import the data
 import { journeyTimes } from '../../data/JourneyTimes';
 // Import the map images
 import general from '../../assets/images/journeyTimes/general.png';
 
-import './JourneyTimes.scss';
+// import './JourneyTimes.scss';
 
 const { Option } = Select;
 
@@ -38,19 +39,10 @@ const convertKeysToOption = objKey =>
   ));
 
 export default function JourneyTimesControlPanel() {
-  const [toLocation, handleToLocation] = useState('');
+  const [toLocation, handleToLocation] = useState('SELECT LOCATION');
   const [fromLocation, handleFromLocation] = useState('');
 
-  const resetState = () => {
-    handleToLocation('');
-    handleFromLocation('');
-  };
-
-  let beforeTime,
-    afterTime,
-    timeReduction = 100,
-    beforeString,
-    afterString;
+  let beforeTime, afterTime, beforeString, afterString, timeReduction;
 
   if (fromLocation && toLocation && journeyTimes[fromLocation][toLocation]) {
     const ROUTE = journeyTimes[fromLocation][toLocation];
@@ -106,7 +98,7 @@ export default function JourneyTimesControlPanel() {
               <StyledH4>After</StyledH4>
               <h3>{afterString}</h3>
             </StyledSliderHeadings>
-            <ProgressBar value={timeReduction} />
+            <ProgressBar value={timeReduction ? timeReduction : 100} />
           </StyledSlider>
         </div>
       </StyledContainer>
@@ -145,3 +137,12 @@ const StyledSliderHeadings = styled.div`
 const StyledH4 = styled.h4`
   align-self: center;
 `;
+
+/*
+ <StyledSelect
+              defaultValue='SELECT LOCATION'
+              onFocus={() => handleToLocation('')}
+              onChange={value => handleFromLocation(value)}
+            >
+              {FROM_LOCATIONS_OPTIONS_MARKUP}
+            </StyledSelect> */
