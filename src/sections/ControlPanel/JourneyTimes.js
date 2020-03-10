@@ -45,22 +45,15 @@ export default function JourneyTimesControlPanel() {
   let beforeTime, afterTime, beforeString, afterString, timeReduction;
 
   if (fromLocation && toLocation) {
-if (journeyTimes[fromLocation][toLocation]) {
+    const ROUTE = journeyTimes[fromLocation][toLocation];
 
-  const ROUTE = journeyTimes[fromLocation][toLocation];
-
-  beforeTime = ROUTE[0];
-  afterTime = ROUTE[1];
-
-  beforeString = convertNumToString(beforeTime);
-  afterString = convertNumToString(afterTime);
-
-  timeReduction = Math.round((afterTime / beforeTime) * 100);
-} else {
-
-}
-
-
+    if (ROUTE) {
+      beforeTime = ROUTE[0];
+      afterTime = ROUTE[1];
+      beforeString = convertNumToString(beforeTime);
+      afterString = convertNumToString(afterTime);
+      timeReduction = Math.round((afterTime / beforeTime) * 100);
+    }
   }
 
   const FROM_LOCATIONS_OPTIONS_MARKUP = convertKeysToOption(journeyTimes);
@@ -160,3 +153,18 @@ const StyledH4 = styled.h4`
   align-self: center;
   padding-bottom: 0px;
 `;
+
+/* 
+    // if the selected journey exists
+    if (journeyTimes[fromLocation][toLocation]) {
+      // const ROUTE = journeyTimes[fromLocation][toLocation];
+      beforeTime = ROUTE[0];
+      afterTime = ROUTE[1];
+
+      beforeString = convertNumToString(beforeTime);
+      afterString = convertNumToString(afterTime);
+
+      timeReduction = Math.round((afterTime / beforeTime) * 100);
+    }
+
+*/
