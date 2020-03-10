@@ -22,3 +22,32 @@
 .ant-select-dropdown {
   text-transform: capitalize;
 }
+
+.main-img {
+  .invisible-area {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+  }
+
+  .area-one {
+    top: 135px;
+    left: 95px;
+  }
+
+  .area-two {
+    top: 135px;
+    left: 275px;
+  }
+
+  .tooltip {
+    display: none;
+    background: white;
+    border-radius: 5px;
+    border: 1px solid black;
+  }
+
+  .invisible-area:hover .tooltip {
+    display: block;
+  }
+}

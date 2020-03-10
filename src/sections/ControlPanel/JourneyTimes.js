@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Select } from 'antd';
+import { Map, TileLayer, WMSTileLayer } from 'react-leaflet';
 
 import MapBox from '../MapBox/MapBox';
 import InfoBox from '../InfoBox/JourneyTimes/Info';
@@ -8,7 +9,7 @@ import ProgressBar from '../../components/ProgressBar';
 // import the data
 import { journeyTimes } from '../../data/JourneyTimes';
 // Import the map images
-import general from '../../assets/images/journeyTimes/general.png';
+import mapImage from '../../assets/images/journeyTimes/journey-times.png';
 
 import './JourneyTimes.scss';
 
@@ -41,6 +42,15 @@ const convertKeysToOption = objKey =>
 export default function JourneyTimesControlPanel() {
   const [toLocation, handleToLocation] = useState('SELECT LOCATION');
   const [fromLocation, handleFromLocation] = useState('');
+
+  const [mapLocationA, handleMapLocationA] = useState('');
+  const [mapLocationB, handleMapLocationB] = useState('');
+
+  const onMapMarkerClicked = locationClicked => {
+    mapLocationA === ''
+      ? handleMapLocationA(locationClicked)
+      : handleMapLocationB(locationClicked);
+  };
 
   let beforeTime, afterTime, beforeString, afterString, timeReduction;
 
@@ -102,7 +112,33 @@ export default function JourneyTimesControlPanel() {
           </StyledSlider>
         </div>
       </StyledContainer>
-      <MapBox imgSrc={general} />
+
+      <StyledClickMap>
+        <img
+          src={mapImage}
+          alt='journey-times-map'
+          style={{ maxWidth: '100%', height: 'auto' }}
+        />
+        <StyledMarkerContainer style={{ top: 474, left: 264 }}>
+          <StyledMarker
+            id='map-marker__newcastle'
+            onClick={() => onMapMarkerClicked('newcastle')}
+          >
+            N
+          </StyledMarker>
+        </StyledMarkerContainer>
+        <StyledMarkerContainer style={{ top: 35, left: 155 }}>
+          <StyledMarker>Sydney</StyledMarker>
+        </StyledMarkerContainer>
+
+        <div className='invisible-area area-one'>
+          <div className='tooltip'>I'm a tooltip!</div>
+        </div>
+        <div className='invisible-area area-two'>
+          <div className='tooltip'>I'm another tooltip!</div>
+        </div>
+      </StyledClickMap>
+
       <InfoBox />
     </>
   );
@@ -154,17 +190,10 @@ const StyledH4 = styled.h4`
   padding-bottom: 0px;
 `;
 
-/* 
-    // if the selected journey exists
-    if (journeyTimes[fromLocation][toLocation]) {
-      // const ROUTE = journeyTimes[fromLocation][toLocation];
-      beforeTime = ROUTE[0];
-      afterTime = ROUTE[1];
-
-      beforeString = convertNumToString(beforeTime);
-      afterString = convertNumToString(afterTime);
-
-      timeReduction = Math.round((afterTime / beforeTime) * 100);
-    }
-
-*/
+const StyledClickMap = styled.div``;
+const StyledMarkerContainer = styled.div`
+  position: absolute;
+`;
+const StyledMarker = styled.div`
+  display: none;
+`;
