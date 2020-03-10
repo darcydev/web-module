@@ -2,10 +2,11 @@
 
 .ant-select {
   .ant-select-selector {
-    background-color: $darkBlue !important;
+    text-transform: capitalize;
+    /* background-color: $darkBlue !important; */
 
     .ant-select-selection-search {
-      background-color: $lightBlue !important;
+      /* background-color: $lightBlue !important; */
     }
 
     .ant-select-selection-item {
@@ -14,6 +15,10 @@
   }
 
   .ant-select-arrow {
-    color: $white !important;
+    color: $darkBlue;
   }
+}
+
+.ant-select-dropdown {
+  text-transform: capitalize;
 }

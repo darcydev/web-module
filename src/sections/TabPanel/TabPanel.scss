@@ -1,3 +1,5 @@
+@import '../../variables.scss';
+
 .ant-tabs-bar {
   border-bottom: 5px solid blue !important;
 
@@ -16,15 +18,15 @@
       .ant-tabs-tab {
         width: 33%;
         font-size: 14px;
-        background: rgb(102, 217, 255) !important;
-        letter-spacing: 1.25px;
+        background: $lightBlue !important;
+        letter-spacing: 1.15px;
         margin: 0 2px;
         border-top-left-radius: 9px;
         border-top-right-radius: 9px;
       }
 
       .ant-tabs-tab-active {
-        background: rgb(0, 0, 185) !important;
+        background: $darkBlue !important;
       }
     }
   }

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 export default function InfoList({ heading, icon, listContent }) {
-  const LIST_ITEMS_MARKUP = listContent.map((v, i) => <li>{v}</li>);
+  const LIST_ITEMS_MARKUP = listContent.map(v => <li key={v}>{v}</li>);
 
   return (
     <StyledContainer>

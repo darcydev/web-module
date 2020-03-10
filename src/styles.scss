@@ -2,12 +2,18 @@
 
 @import './variables.scss';
 
-h1, h2, h3,h4, h5, h6 {
-  font-family: $headingPrimary, 'Arial', 'san-sarief';
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $headingPrimary, "Palatino Linotype", "Book Antiqua", Palatino, serif
 }
 
 p {
-font-family: $textPrimary, 'Arial', 'san-sarief';
+  font-family: $textPrimary, "Palatino Linotype", "Book Antiqua", Palatino, serif
+  
 }
 
 .App {

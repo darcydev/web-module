@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import styled from 'styled-components';
 import { Tabs } from 'antd';
 
 import CorridorsControlPanel from '../ControlPanel/Corridors';
@@ -15,12 +16,16 @@ export default function TabPanel() {
       <TabPane tab='Corridors' key='1'>
         <CorridorsControlPanel />
       </TabPane>
-      <TabPane tab='Journey Times' key='2'>
+      <StyledBigTab tab='Journey Times' key='2'>
         <JourneyTimesControlPanel />
-      </TabPane>
+      </StyledBigTab>
       <TabPane tab='Stages' key='3'>
         <StagesControlPanel />
       </TabPane>
     </Tabs>
   );
 }
+
+const StyledBigTab = styled(TabPane)`
+  font-size: 20px !important;
+`;

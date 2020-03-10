@@ -10,7 +10,7 @@ import { journeyTimes } from '../../data/JourneyTimes';
 // Import the map images
 import general from '../../assets/images/journeyTimes/general.png';
 
-// import './JourneyTimes.scss';
+import './JourneyTimes.scss';
 
 const { Option } = Select;
 
@@ -20,7 +20,7 @@ const { Option } = Select;
  * @returns {string} 2hrs 30min
  */
 const convertNumToString = num => {
-  let hour = Math.round(num);
+  let hour = Math.floor(num);
   let minute = Math.round((num - hour) * 100);
 
   return `${hour}hrs ${minute}min`;
@@ -33,9 +33,9 @@ const convertNumToString = num => {
  */
 const convertKeysToOption = objKey =>
   Object.keys(objKey).map(v => (
-    <Option key={v} value={v}>
+    <StyledOption key={v} value={v}>
       {v}
-    </Option>
+    </StyledOption>
   ));
 
 export default function JourneyTimesControlPanel() {
@@ -44,16 +44,23 @@ export default function JourneyTimesControlPanel() {
 
   let beforeTime, afterTime, beforeString, afterString, timeReduction;
 
-  if (fromLocation && toLocation && journeyTimes[fromLocation][toLocation]) {
-    const ROUTE = journeyTimes[fromLocation][toLocation];
+  if (fromLocation && toLocation) {
+if (journeyTimes[fromLocation][toLocation]) {
 
-    beforeTime = ROUTE[0];
-    afterTime = ROUTE[1];
+  const ROUTE = journeyTimes[fromLocation][toLocation];
 
-    beforeString = convertNumToString(beforeTime);
-    afterString = convertNumToString(afterTime);
+  beforeTime = ROUTE[0];
+  afterTime = ROUTE[1];
 
-    timeReduction = Math.round((afterTime / beforeTime) * 100);
+  beforeString = convertNumToString(beforeTime);
+  afterString = convertNumToString(afterTime);
+
+  timeReduction = Math.round((afterTime / beforeTime) * 100);
+} else {
+
+}
+
+
   }
 
   const FROM_LOCATIONS_OPTIONS_MARKUP = convertKeysToOption(journeyTimes);
@@ -88,7 +95,7 @@ export default function JourneyTimesControlPanel() {
         <div>
           <StyledSlider>
             <StyledSliderHeadings>
-              <styledH4>Before</styledH4>
+              <StyledH4>Before</StyledH4>
               <h3>{beforeString}</h3>
             </StyledSliderHeadings>
             <ProgressBar value={100} />
@@ -109,7 +116,7 @@ export default function JourneyTimesControlPanel() {
 }
 
 const StyledContainer = styled.div`
-  padding: ${props => props.theme.sizes.sm};
+  padding: 10px;
 `;
 
 const StyledFlexContainer = styled.div`
@@ -119,11 +126,26 @@ const StyledFlexContainer = styled.div`
 
 const StyledSelectBarContainer = styled.div`
   width: 48%;
+
+  ${({ theme }) => theme.sm`
+    h5 {
+      font-size: 14px;
+    }
+  `}
 `;
 
 const StyledSelect = styled(Select)`
   font-size: 18px;
   width: 100%;
+
+  ${({ theme }) => theme.sm`
+    font-size: 12px;
+  `}
+`;
+
+const StyledOption = styled(Option)`
+  font-size: 18px;
+  background: red;
 `;
 
 const StyledSlider = styled.div`
@@ -136,13 +158,5 @@ const StyledSliderHeadings = styled.div`
 
 const StyledH4 = styled.h4`
   align-self: center;
+  padding-bottom: 0px;
 `;
-
-/*
- <StyledSelect
-              defaultValue='SELECT LOCATION'
-              onFocus={() => handleToLocation('')}
-              onChange={value => handleFromLocation(value)}
-            >
-              {FROM_LOCATIONS_OPTIONS_MARKUP}
-            </StyledSelect> */
