@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Select } from 'antd';
-import { Map, TileLayer, WMSTileLayer } from 'react-leaflet';
+import { PathLine } from 'react-svg-pathline';
 
-import MapBox from '../MapBox/MapBox';
-import InfoBox from '../InfoBox/JourneyTimes/Info';
+// components
 import ProgressBar from '../../components/ProgressBar';
-// import the data
-import { journeyTimes } from '../../data/JourneyTimes';
-// Import the map images
-import mapImage from '../../assets/images/journeyTimes/journey-times.png';
 
+// data
+import { journeyTimes } from '../../data/JourneyTimes';
+
+// assets
+import mapImage from '../../assets/images/journeyTimes/journey-times.png';
 import './JourneyTimes.scss';
 
 const { Option } = Select;
@@ -45,6 +45,8 @@ export default function JourneyTimesControlPanel() {
 
   const [mapLocationA, handleMapLocationA] = useState('');
   const [mapLocationB, handleMapLocationB] = useState('');
+
+  const LINE = 10;
 
   const onMapMarkerClicked = locationClicked => {
     mapLocationA === ''
@@ -120,26 +122,38 @@ export default function JourneyTimesControlPanel() {
           style={{ maxWidth: '100%', height: 'auto' }}
         />
         <StyledMarkerContainer style={{ top: 474, left: 264 }}>
-          <StyledMarker
-            id='map-marker__newcastle'
-            onClick={() => onMapMarkerClicked('newcastle')}
-          >
-            N
-          </StyledMarker>
+          <StyledMarker id='map-marker__newcastle'>N</StyledMarker>
+          <div style={{ position: 'absolute', top: 97, left: -24 }}>
+            <svg width='150px' height='150px'>
+              <PathLine
+                points={[
+                  { x: 150, y: 0 },
+                  { x: 100, y: 80 },
+                  { x: 70, y: 130 }
+                ]}
+                stroke='green'
+                strokeWidth='20'
+                fill='none'
+                r={10}
+              />
+            </svg>
+          </div>
         </StyledMarkerContainer>
         <StyledMarkerContainer style={{ top: 35, left: 155 }}>
           <StyledMarker>Sydney</StyledMarker>
         </StyledMarkerContainer>
-
-        <div className='invisible-area area-one'>
-          <div className='tooltip'>I'm a tooltip!</div>
-        </div>
-        <div className='invisible-area area-two'>
-          <div className='tooltip'>I'm another tooltip!</div>
-        </div>
       </StyledClickMap>
 
-      <InfoBox />
+      {/* INFO BOX */}
+      <div style={{ padding: '5px 10px' }}>
+        <p style={{ textAlign: 'left' }}>
+          Economic modelling shows ONE HOUR is the accepted business/commute
+          time.
+          <br />
+          <br />
+          Research shows people will travel TWO HOURS for a social interaction.
+        </p>
+      </div>
     </>
   );
 }
