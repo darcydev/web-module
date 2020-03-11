@@ -46,8 +46,6 @@ export default function JourneyTimesControlPanel() {
   const [mapLocationA, handleMapLocationA] = useState('');
   const [mapLocationB, handleMapLocationB] = useState('');
 
-  const LINE = 10;
-
   const onMapMarkerClicked = locationClicked => {
     mapLocationA === ''
       ? handleMapLocationA(locationClicked)
@@ -115,7 +113,33 @@ export default function JourneyTimesControlPanel() {
         </div>
       </StyledContainer>
 
-      <StyledClickMap>
+      {/* MAP SECTION */}
+      <div style={{ position: 'relative' }}>
+        <img
+          src={mapImage}
+          alt='journey-times-map'
+          style={{ display: 'block', width: '100%' }}
+        />
+        <StyledMarkerSpan
+          id='map-marker__sydney'
+          onClick={() => console.log('sydney was clicked')}
+          style={{
+            top: '56%',
+            left: '52%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__newcastle'
+          onClick={() => console.log('newcastle was clicked')}
+          style={{
+            top: '40%',
+            left: '63%'
+          }}
+        ></StyledMarkerSpan>
+      </div>
+      {/* \.MAP SECTION */}
+
+      {/*  <StyledClickMap img={mapImage}>
         <img
           src={mapImage}
           alt='journey-times-map'
@@ -123,28 +147,36 @@ export default function JourneyTimesControlPanel() {
         />
         <StyledMarkerContainer style={{ top: 474, left: 264 }}>
           <StyledMarker id='map-marker__newcastle'>N</StyledMarker>
-          <div style={{ position: 'absolute', top: 97, left: -24 }}>
-            <svg width='150px' height='150px'>
-              <PathLine
-                points={[
-                  { x: 150, y: 0 },
-                  { x: 100, y: 80 },
-                  { x: 70, y: 130 }
-                ]}
-                stroke='green'
-                strokeWidth='20'
-                fill='none'
-                r={10}
-              />
-            </svg>
-          </div>
         </StyledMarkerContainer>
+        <StyledMarkerContainer style={{ top: 474, left: 264 }}>
+          <StyledMarker id='map-marker__newcastle'>N</StyledMarker>
+        </StyledMarkerContainer>
+        <StyledMarkerContainer style={{ top: 474, left: 264 }}>
+          <StyledMarker id='map-marker__newcastle'>N</StyledMarker>
+        </StyledMarkerContainer>
+        <div style={{ position: 'absolute', top: 97, left: -24 }}>
+          <svg width='150px' height='150px'>
+            <PathLine
+              points={[
+                { x: 150, y: 0 },
+                { x: 100, y: 80 },
+                { x: 70, y: 130 }
+              ]}
+              stroke='green'
+              strokeWidth='20'
+              fill='none'
+              r={10}
+            />
+          </svg>
+        </div>
         <StyledMarkerContainer style={{ top: 35, left: 155 }}>
           <StyledMarker>Sydney</StyledMarker>
         </StyledMarkerContainer>
-      </StyledClickMap>
+      </StyledClickMap> 
+      */}
+      {/* \.MAP SECTION */}
 
-      {/* INFO BOX */}
+      {/* INFO SECTION */}
       <div style={{ padding: '5px 10px' }}>
         <p style={{ textAlign: 'left' }}>
           Economic modelling shows ONE HOUR is the accepted business/commute
@@ -154,6 +186,7 @@ export default function JourneyTimesControlPanel() {
           Research shows people will travel TWO HOURS for a social interaction.
         </p>
       </div>
+      {/* \.INFO SECTION */}
     </>
   );
 }
@@ -204,10 +237,9 @@ const StyledH4 = styled.h4`
   padding-bottom: 0px;
 `;
 
-const StyledClickMap = styled.div``;
-const StyledMarkerContainer = styled.div`
+const StyledMarkerSpan = styled.span`
   position: absolute;
-`;
-const StyledMarker = styled.div`
-  display: none;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 `;
