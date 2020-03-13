@@ -48,6 +48,7 @@ export default function CorridorsControlPanel() {
 
   return (
     <>
+      {/* CONTROL SECTION */}
       <StyledContainer>
         <h3 style={{ textAlign: 'left' }}>Select a route for more detail</h3>
         <StyledFlexDiv>
@@ -117,8 +118,15 @@ export default function CorridorsControlPanel() {
           </StyledButton>
         </StyledFlexDiv>
       </StyledContainer>
+      {/* \.CONTROL SECTION */}
+
+      {/* MAP SECTION */}
       <MapBox imgSrc={map} alt={btnSelected} />
+      {/* \.MAP SECTION */}
+
+      {/* INFO SECTION */}
       <InfoBox heading={btnSelected} content={btnSelected} />
+      {/* \.INFO SECTION */}
     </>
   );
 }

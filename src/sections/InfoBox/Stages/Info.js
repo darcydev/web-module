@@ -1,17 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
 export default function Info({
-  heading = "St Marys to Orange capacity upgrade",
+  heading = 'St Marys to Orange capacity upgrade',
   listContent = [
-    "+45% population",
-    "+4,218 people employed",
-    "+$510m in GRP*",
-    "+73.3% land value prices"
+    '+45% population',
+    '+4,218 people employed',
+    '+$510m in GRP*',
+    '+73.3% land value prices'
   ],
   paragraph
 }) {
-  const LIST_MARKUP = listContent.map((v) => <li key={v}>{v}</li>);
+  const LIST_MARKUP = listContent.map(v => <li key={v}>{v}</li>);
 
   return (
     <StyledDiv>

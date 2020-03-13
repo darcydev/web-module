@@ -73,7 +73,8 @@ export default function JourneyTimesControlPanel() {
 
   return (
     <>
-      <StyledContainer>
+      {/* CONTROL SECTION */}
+      <div>
         <StyledFlexContainer>
           <StyledSelectBarContainer>
             <h5 style={{ textAlign: 'left' }}>FROM:</h5>
@@ -111,7 +112,8 @@ export default function JourneyTimesControlPanel() {
             <ProgressBar value={timeReduction ? timeReduction : 100} />
           </StyledSlider>
         </div>
-      </StyledContainer>
+      </div>
+      {/* \.CONTROL SECTION */}
 
       {/* MAP SECTION */}
       <div style={{ position: 'relative' }}>
@@ -190,10 +192,6 @@ export default function JourneyTimesControlPanel() {
     </>
   );
 }
-
-const StyledContainer = styled.div`
-  padding: 10px;
-`;
 
 const StyledFlexContainer = styled.div`
   display: flex;
