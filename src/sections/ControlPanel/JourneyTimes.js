@@ -43,15 +43,6 @@ export default function JourneyTimesControlPanel() {
   const [toLocation, handleToLocation] = useState('SELECT LOCATION');
   const [fromLocation, handleFromLocation] = useState('');
 
-  const [mapLocationA, handleMapLocationA] = useState('');
-  const [mapLocationB, handleMapLocationB] = useState('');
-
-  const onMapMarkerClicked = locationClicked => {
-    mapLocationA === ''
-      ? handleMapLocationA(locationClicked)
-      : handleMapLocationB(locationClicked);
-  };
-
   let beforeTime, afterTime, beforeString, afterString, timeReduction;
 
   if (fromLocation && toLocation) {
@@ -123,11 +114,19 @@ export default function JourneyTimesControlPanel() {
           style={{ display: 'block', width: '100%' }}
         />
         <StyledMarkerSpan
-          id='map-marker__sydney'
-          onClick={() => console.log('sydney was clicked')}
+          id='map-marker__port-macquarie'
+          onClick={() => console.log('port macquiare was clicked')}
           style={{
-            top: '56%',
-            left: '52%'
+            top: '15%',
+            left: '81%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__taree'
+          onClick={() => console.log('taree was clicked')}
+          style={{
+            top: '23%',
+            left: '76%'
           }}
         ></StyledMarkerSpan>
         <StyledMarkerSpan
@@ -138,44 +137,104 @@ export default function JourneyTimesControlPanel() {
             left: '63%'
           }}
         ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__lake-macquarie'
+          onClick={() => console.log('lake macquarie was clicked')}
+          style={{
+            top: '42%',
+            left: '61%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__tuggerah'
+          onClick={() => console.log('tuggerah was clicked')}
+          style={{
+            top: '46%',
+            left: '58%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__gosford'
+          onClick={() => console.log('gosford was clicked')}
+          style={{
+            top: '48%',
+            left: '57%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__epping'
+          onClick={() => console.log('epping was clicked')}
+          style={{
+            top: '54%',
+            left: '54%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__sydney'
+          onClick={() => console.log('sydney was clicked')}
+          style={{
+            top: '56%',
+            left: '52%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__parkes'
+          onClick={() => console.log('parkes was clicked')}
+          style={{
+            top: '45%',
+            left: '5%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__orange'
+          onClick={() => console.log('orange was clicked')}
+          style={{
+            top: '48%',
+            left: '20%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__bathurst'
+          onClick={() => console.log('bathurst was clicked')}
+          style={{
+            top: '49%',
+            left: '29%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__lithgow'
+          onClick={() => console.log('lithgow was clicked')}
+          style={{
+            top: '50%',
+            left: '38%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__katoomba'
+          onClick={() => console.log('katoomba was clicked')}
+          style={{
+            top: '54%',
+            left: '41%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__wollongong'
+          onClick={() => console.log('wollongong was clicked')}
+          style={{
+            border: '1px solid red',
+            top: '66%',
+            left: '49%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__canberra'
+          onClick={() => console.log('canberra was clicked')}
+          style={{
+            top: '82%',
+            left: '22%'
+          }}
+        ></StyledMarkerSpan>
       </div>
-      {/* \.MAP SECTION */}
-
-      {/*  <StyledClickMap img={mapImage}>
-        <img
-          src={mapImage}
-          alt='journey-times-map'
-          style={{ maxWidth: '100%', height: 'auto' }}
-        />
-        <StyledMarkerContainer style={{ top: 474, left: 264 }}>
-          <StyledMarker id='map-marker__newcastle'>N</StyledMarker>
-        </StyledMarkerContainer>
-        <StyledMarkerContainer style={{ top: 474, left: 264 }}>
-          <StyledMarker id='map-marker__newcastle'>N</StyledMarker>
-        </StyledMarkerContainer>
-        <StyledMarkerContainer style={{ top: 474, left: 264 }}>
-          <StyledMarker id='map-marker__newcastle'>N</StyledMarker>
-        </StyledMarkerContainer>
-        <div style={{ position: 'absolute', top: 97, left: -24 }}>
-          <svg width='150px' height='150px'>
-            <PathLine
-              points={[
-                { x: 150, y: 0 },
-                { x: 100, y: 80 },
-                { x: 70, y: 130 }
-              ]}
-              stroke='green'
-              strokeWidth='20'
-              fill='none'
-              r={10}
-            />
-          </svg>
-        </div>
-        <StyledMarkerContainer style={{ top: 35, left: 155 }}>
-          <StyledMarker>Sydney</StyledMarker>
-        </StyledMarkerContainer>
-      </StyledClickMap> 
-      */}
       {/* \.MAP SECTION */}
 
       {/* INFO SECTION */}
@@ -225,6 +284,7 @@ const StyledOption = styled(Option)`
 const StyledSlider = styled.div`
   padding: 10px 0;
 `;
+
 const StyledSliderHeadings = styled.div`
   display: flex;
   justify-content: space-between;
@@ -237,7 +297,10 @@ const StyledH4 = styled.h4`
 
 const StyledMarkerSpan = styled.span`
   position: absolute;
-  width: 30px;
-  height: 30px;
+  width: 12px;
+  height: 12px;
+  border-radius: 5px;
   cursor: pointer;
+
+  border: 1px solid red;
 `;

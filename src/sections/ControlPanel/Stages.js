@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Slider } from 'antd';
 
+// components
 import MapBox from '../MapBox/MapBox';
 import Info from '../InfoBox/Stages/Info';
 
-// Import the map images
+// map images
 import one from '../../assets/1.png';
 import two from '../../assets/2.png';
 import three from '../../assets/3.png';
