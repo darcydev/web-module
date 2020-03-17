@@ -121,6 +121,27 @@ export default function JourneyTimesControlPanel() {
             left: '81%'
           }}
         ></StyledMarkerSpan>
+        <div
+          className='svg-container'
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%'
+          }}
+        >
+          <svg>
+            <line
+              stroke='#5AB1BB'
+              stroke-width='4'
+              x1='275'
+              x2='10'
+              y1='70'
+              y2='1000'
+            ></line>
+          </svg>
+        </div>
         <StyledMarkerSpan
           id='map-marker__taree'
           onClick={() => console.log('taree was clicked')}
@@ -218,12 +239,84 @@ export default function JourneyTimesControlPanel() {
           }}
         ></StyledMarkerSpan>
         <StyledMarkerSpan
+          id='map-marker__st-marys'
+          onClick={() => console.log('st marys was clicked')}
+          style={{
+            top: '55%',
+            left: '48%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__campbelltown'
+          onClick={() => console.log('campbelltown was clicked')}
+          style={{
+            top: '59%',
+            left: '49%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__maccarthur'
+          onClick={() => console.log('maccarthur was clicked')}
+          style={{
+            top: '62%',
+            left: '47%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
           id='map-marker__wollongong'
           onClick={() => console.log('wollongong was clicked')}
           style={{
             border: '1px solid red',
             top: '66%',
             left: '49%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__dapto'
+          onClick={() => console.log('dapto was clicked')}
+          style={{
+            top: '69%',
+            left: '49%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__shellharbour'
+          onClick={() => console.log('shellharbour was clicked')}
+          style={{
+            top: '71%',
+            left: '49%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__kiama'
+          onClick={() => console.log('kiama was clicked')}
+          style={{
+            top: '72%',
+            left: '48%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__bomdaberry'
+          onClick={() => console.log('bomdaberry was clicked')}
+          style={{
+            top: '74%',
+            left: '46%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__moss-vale'
+          onClick={() => console.log('moss vale was clicked')}
+          style={{
+            top: '69%',
+            left: '42%'
+          }}
+        ></StyledMarkerSpan>
+        <StyledMarkerSpan
+          id='map-marker__goulburn'
+          onClick={() => console.log('goulburn was clicked')}
+          style={{
+            top: '72%',
+            left: '31%'
           }}
         ></StyledMarkerSpan>
         <StyledMarkerSpan
