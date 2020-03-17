@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 // Import the map images
-import imageGeneral from '../../assets/images/corridors/general.png';
-import imageNorthern from '../../assets/images/corridors/northern.png';
-import imageSouthernInland from '../../assets/images/corridors/southernInland.png';
-import imageSouthernCoastal from '../../assets/images/corridors/southernCoastal.png';
-import imageCentralWest from '../../assets/images/corridors/centralWest.png';
-
-import MapBox from '../MapBox/MapBox';
-import InfoBox from '../InfoBox/Corridors/Info';
+import imageGeneral from '../assets/images/corridors/general.png';
+import imageNorthern from '../assets/images/corridors/northern.png';
+import imageSouthernInland from '../assets/images/corridors/southernInland.png';
+import imageSouthernCoastal from '../assets/images/corridors/southernCoastal.png';
+import imageCentralWest from '../assets/images/corridors/centralWest.png';
 
 export default function CorridorsControlPanel() {
   const [btnSelected, handleBtnSelect] = useState('general');
@@ -18,32 +15,34 @@ export default function CorridorsControlPanel() {
     <button onClick={() => handleBtnSelect('general')}>X</button>
   );
 
-  let map, info;
+  let map,
+    infoHeading,
+    infoContent = 'custom info content for each route goes here';
 
   switch (btnSelected) {
     case 'general':
       map = imageGeneral;
-      info = 'to do';
+      infoHeading = 'General';
       break;
     case 'northern':
       map = imageNorthern;
-      info = 'to do';
+      infoHeading = 'Northern Route';
       break;
     case 'southernInland':
       map = imageSouthernInland;
-      info = 'to do';
+      infoHeading = 'Southern Inland Route';
       break;
     case 'southernCoastal':
       map = imageSouthernCoastal;
-      info = 'to do';
+      infoHeading = 'Southern Coastal Route';
       break;
     case 'centralWest':
       map = imageCentralWest;
-      info = 'to do';
+      infoHeading = 'Central West Route';
       break;
     default:
       map = imageGeneral;
-      info = 'to do';
+      infoHeading = 'General Route';
   }
 
   return (
@@ -121,11 +120,14 @@ export default function CorridorsControlPanel() {
       {/* \.CONTROL SECTION */}
 
       {/* MAP SECTION */}
-      <MapBox imgSrc={map} alt={btnSelected} />
+      <StyledMap src={map} alt={btnSelected} />
       {/* \.MAP SECTION */}
 
       {/* INFO SECTION */}
-      <InfoBox heading={btnSelected} content={btnSelected} />
+      <div>
+        <h1>{infoHeading}</h1>
+        <div className='info-content'>{infoContent}</div>
+      </div>
       {/* \.INFO SECTION */}
     </>
   );
@@ -154,4 +156,11 @@ const StyledButton = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const StyledMap = styled.img`
+  width: 100%;
+  height: auto;
+  max-width: 760px;
+  max-height: 760px;
 `;

@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Select } from 'antd';
-import { PathLine } from 'react-svg-pathline';
 
 // components
-import ProgressBar from '../../components/ProgressBar';
+import ProgressBar from '../components/ProgressBar';
 
 // data
-import { journeyTimes } from '../../data/JourneyTimes';
+import { journeyTimes } from '../data/JourneyTimes';
 
 // assets
-import mapImage from '../../assets/images/journeyTimes/journey-times.png';
+import mapImage from '../assets/images/journeyTimes/journey-times.png';
 import './JourneyTimes.scss';
 
 const { Option } = Select;

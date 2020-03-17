@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Tabs } from 'antd';
 
-import CorridorsControlPanel from '../ControlPanel/Corridors';
-import JourneyTimesControlPanel from '../ControlPanel/JourneyTimes';
-import StagesControlPanel from '../ControlPanel/Stages';
+import Corridors from '../Corridors';
+import JourneyTimes from '../JourneyTimes'
+import Stages from '../Stages';
 
 import './TabPanel.scss';
 
@@ -14,13 +14,13 @@ export default function TabPanel() {
   return (
     <Tabs animated={true} type='card'>
       <TabPane tab='Corridors' key='1'>
-        <CorridorsControlPanel />
+        <Corridors />
       </TabPane>
       <StyledBigTab tab='Journey Times' key='2'>
-        <JourneyTimesControlPanel />
+        <JourneyTimes />
       </StyledBigTab>
       <TabPane tab='Stages' key='3'>
-        <StagesControlPanel />
+        <Stages />
       </TabPane>
     </Tabs>
   );
